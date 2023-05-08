@@ -26,9 +26,7 @@ public class PlayerMovement : MonoBehaviour
         
         grounded = rigidbody.Raycast(Vector2.down);
 
-        if(grounded){
-
-        }
+        
         ApplyGravity();
     }
 
