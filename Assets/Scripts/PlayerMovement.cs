@@ -1,15 +1,26 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;
     private float inputAxis;
+
+    private float inputDash;
+    private bool canDash = true;
+    private bool isDashing = false;
+    public float dashFuerza = 24f;
+    public float dashTiempo = 0.2f;
+    public float dashCooldown = 1f;
+
     private Vector2 velocity;
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
     public float jumpForceConstante = 1.9f;
+    public float constanteInercia = 10f;
     public float jumpForce => (jumpForceConstante * maxJumpHeight / (maxJumpTime / 2));
     public float gravity => (-2f * maxJumpHeight / Mathf.Pow(maxJumpTime/2f, 2));
 
@@ -23,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update(){
+        
+        if(isDashing){
+            return;
+        }
+        
         HorizontalMovement();
         
         grounded = rigidbody.Raycast(Vector2.down);
@@ -57,18 +73,46 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement(){
         inputAxis = Input.GetAxis("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime * 6f);
+        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime * constanteInercia);
+
+        inputDash = Input.GetAxis("Fire3");
+
+        if(inputDash == 1 && canDash){
+            StartCoroutine(Dash());
+            
+        }
 
         if(rigidbody.Raycast(Vector2.right * velocity.x)){
             velocity.x = 0;
         }
 
-        if(velocity.x >= 0f){
+        if(velocity.x > 0f){
             transform.eulerAngles = Vector3.zero;
         } else if(velocity.x < 0f){
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
     }
+
+    private IEnumerator Dash(){
+        canDash = false;
+        isDashing = true;
+        float originalGravity = rigidbody.gravityScale;
+        rigidbody.gravityScale = 0f;
+        if(transform.eulerAngles.y == 0){
+            velocity = Vector2.right * dashFuerza;
+        } else if (transform.eulerAngles.y == 180){
+            velocity = Vector2.left * dashFuerza;
+        }
+       
+        yield return new WaitForSeconds(dashTiempo);
+        rigidbody.gravityScale = originalGravity;
+        isDashing = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+        
+        
+    }   
 
     private void FixedUpdate(){
         Vector2 position = rigidbody.position;

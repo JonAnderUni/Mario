@@ -70,3 +70,16 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/Scripts/Additional.meta
+/Assets/Scripts/Additional/CharacterMovementDataController.cs
+/Assets/Scripts/Additional/CharacterMovementDataController.cs.meta
+/Assets/Scripts/Additional/JuiceSettingsReferences.cs
+/Assets/Scripts/Additional/JuiceSettingsReferences.cs.meta
+/Assets/Scripts/Additional/PresetObject.cs
+/Assets/Scripts/Additional/PresetObject.cs.meta
+/Assets/Scripts/Additional/juiceUpdater.cs
+/Assets/Scripts/Additional/juiceUpdater.cs.meta
+/Assets/Scripts/Additional/jumpTester.cs
+/Assets/Scripts/Additional/jumpTester.cs.meta
+/Assets/Scripts/Additional/movementLimiter.cs
+/Assets/Scripts/Additional/movementLimiter.cs.meta
