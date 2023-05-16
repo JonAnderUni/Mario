@@ -1312,6 +1312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2220883908721699073, guid: 7e75d74a1dbc1b348a0e73bd8aa8b42a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2220883908721699103, guid: 7e75d74a1dbc1b348a0e73bd8aa8b42a, type: 3}
       propertyPath: m_Name
       value: Mario

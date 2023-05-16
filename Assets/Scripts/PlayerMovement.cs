@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
-    public float jumpForce => (2f + maxJumpHeight / (maxJumpTime / 2));
+    public float jumpForceConstante = 1.9f;
+    public float jumpForce => (jumpForceConstante * maxJumpHeight / (maxJumpTime / 2));
     public float gravity => (-2f * maxJumpHeight / Mathf.Pow(maxJumpTime/2f, 2));
 
     public bool grounded {get; private set;}
@@ -26,16 +27,22 @@ public class PlayerMovement : MonoBehaviour
         
         grounded = rigidbody.Raycast(Vector2.down);
 
+        if(grounded){
+            GroundedMovement();
+        }
         
         ApplyGravity();
     }
 
     private void ApplyGravity(){
+        
+        // check if falling
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
         float multiplier = falling ? 2f : 1f;
 
+        // apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
-        velocity.y = Mathf.Max(velocity.y, gravity/ 2f);
+        velocity.y = Mathf.Max(velocity.y, gravity / 2f);
     }
 
     private void GroundedMovement(){
@@ -50,7 +57,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void HorizontalMovement(){
         inputAxis = Input.GetAxis("Horizontal");
-        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+        velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime * 6f);
+
+        if(rigidbody.Raycast(Vector2.right * velocity.x)){
+            velocity.x = 0;
+        }
+
+        if(velocity.x >= 0f){
+            transform.eulerAngles = Vector3.zero;
+        } else if(velocity.x < 0f){
+            transform.eulerAngles = new Vector3(0f, 180f, 0f);
+        }
     }
 
     private void FixedUpdate(){
