@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    private Vector3 offset = new Vector3(0f, 0f, -10f);
+    private Vector3 offset = new Vector3(0f, 3f, -10f);
     public float tiempoSuave = 0.25f;
     private Vector3 velocity = Vector3.zero;
 
@@ -15,7 +13,10 @@ public class CameraScript : MonoBehaviour
     }
 
     private void Update(){
+        Vector3 cameraPosition = transform.position;
         Vector3 targetPosition = target.position + offset;
+        
+
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, tiempoSuave);
 
     } 

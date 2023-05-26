@@ -1,13 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-
 public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;
     private float inputAxis;
-
     private float inputDash;
     private bool canDash = true;
     private bool isDashing = false;
@@ -26,11 +24,15 @@ public class PlayerMovement : MonoBehaviour
 
     public bool grounded {get; private set;}
     public bool jumping {get; private set;}
+    public bool canJumpMidAir{get; private set;}
+    
     
     
     private void Awake(){
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
+        canJumpMidAir = true;
+        
     }
 
     private void Update(){
@@ -79,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(inputDash == 1 && canDash){
             StartCoroutine(Dash());
-            
+                       
         }
 
         if(rigidbody.Raycast(Vector2.right * velocity.x)){
@@ -107,12 +109,19 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashTiempo);
         rigidbody.gravityScale = originalGravity;
         isDashing = false;
+        if(transform.eulerAngles.y == 0){
+            velocity.x = 8f;
+        } else if (transform.eulerAngles.y == 180){
+            velocity.x = -8f;
+        }
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
-        
-        
     }   
+
+    private void AirJump(){
+
+    }
 
     private void FixedUpdate(){
         Vector2 position = rigidbody.position;
