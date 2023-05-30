@@ -5,16 +5,19 @@ public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;
+    public LineRenderer line;
     private float inputAxis;
     private float inputDash;
+    //Parametros dash
     private bool canDash = true;
     private bool isDashing = false;
     public float dashFuerza = 24f;
     public float dashTiempo = 0.2f;
     public float dashCooldown = 1f;
-
+    //Parametros velocidad
     private Vector2 velocity;
     public float moveSpeed = 8f;
+    //Parametros salto
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
     public float jumpForceConstante = 1.9f;
@@ -22,9 +25,20 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce => (jumpForceConstante * maxJumpHeight / (maxJumpTime / 2));
     public float gravity => (-2f * maxJumpHeight / Mathf.Pow(maxJumpTime/2f, 2));
 
+    //Parametros gancho
+    [SerializeField] LayerMask grappleMask;
+    [SerializeField] public float maxDistance = 10f;
+    public float grappleSpeed = 10f;
+    public float grappleShootSpeed = 200f;
+    private bool isGrappling = false;
+    Vector2 target;
+
+
+    //Estados
     public bool grounded {get; private set;}
     public bool jumping {get; private set;}
     public bool canJumpMidAir{get; private set;}
+    private bool retracting = false;
     
     
     
@@ -32,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
         canJumpMidAir = true;
-        
+        line = GetComponent<LineRenderer>();
     }
 
     private void Update(){
@@ -48,6 +62,21 @@ public class PlayerMovement : MonoBehaviour
         if(grounded){
             GroundedMovement();
         }
+
+        if(Input.GetMouseButton(0)){
+            StartGrapple();
+        }
+        if(retracting){
+            Vector2 grapplePos = Vector2.Lerp(transform.position, target, grappleSpeed * Time.deltaTime);
+            transform.position = grapplePos;
+            line.SetPosition(0, transform.position);
+            if(Vector2.Distance(transform.position, target) < 0.5f){
+                retracting = false;
+                isGrappling = false;
+                line.enabled = false;
+            }
+        }
+
         
         ApplyGravity();
     }
@@ -141,5 +170,36 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+    }
+
+    //Codigo del gancho
+    private void StartGrapple(){
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, grappleMask);
+        if(hit.collider != null){
+            isGrappling = true;
+            target = hit.point;
+            line.enabled =true;
+            line.positionCount = 2;
+            StartCoroutine(Grapple());
+        }
+    }
+
+    private IEnumerator Grapple(){
+        float t =0f;
+        float time = 10f;
+        line.SetPosition(0, transform.position);
+        line.SetPosition(1, transform.position);
+        Vector2 fallingVelocity = new Vector2(velocity.x /2, velocity.y/2); 
+        Vector2 newPos;
+        for(; t< time; t += grappleShootSpeed *2 * Time.deltaTime){
+            velocity = fallingVelocity;
+            newPos = Vector2.Lerp(transform.position, target, t/time);
+            line.SetPosition(0, transform.position);
+            line.SetPosition(1, newPos);
+            yield return null;
+        }
+        line.SetPosition(1, target);
+        retracting = true;
     }
 }

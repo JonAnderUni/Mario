@@ -456,7 +456,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189085156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3072f202a7f2a6a4babbf97915ea983b, type: 3}
   m_Name: 
@@ -1459,6 +1459,10 @@ PrefabInstance:
     - target: {fileID: 2220883908721699103, guid: 7e75d74a1dbc1b348a0e73bd8aa8b42a, type: 3}
       propertyPath: m_Name
       value: Mario
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314559583715278673, guid: 7e75d74a1dbc1b348a0e73bd8aa8b42a, type: 3}
+      propertyPath: grappleMask.m_Bits
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e75d74a1dbc1b348a0e73bd8aa8b42a, type: 3}
