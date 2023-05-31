@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake(){
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
-        canJumpMidAir = true;
+        canJumpMidAir = false;
         line = GetComponent<LineRenderer>();
     }
 
@@ -58,12 +58,15 @@ public class PlayerMovement : MonoBehaviour
         HorizontalMovement();
         
         grounded = rigidbody.Raycast(Vector2.down);
+        if(!grounded){
+            AirJump();
+        }
 
         if(grounded){
             GroundedMovement();
         }
-
-        if(Input.GetMouseButton(0)){
+       
+        if(Input.GetMouseButtonDown(0)){
             StartGrapple();
         }
         if(retracting){
@@ -75,8 +78,8 @@ public class PlayerMovement : MonoBehaviour
                 isGrappling = false;
                 line.enabled = false;
             }
+            canDash = true;
         }
-
         
         ApplyGravity();
     }
@@ -95,11 +98,18 @@ public class PlayerMovement : MonoBehaviour
     private void GroundedMovement(){
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
-
-        if(Input.GetButtonDown("Jump")){
+        if(grounded){
+            canJumpMidAir = true;
+        }
+        
+        
+        if(Input.GetButton("Jump")){
             velocity.y = jumpForce;
             jumping = true;
+            canJumpMidAir = true;
+            
         }
+        
     }
 
     private void HorizontalMovement(){
@@ -149,7 +159,11 @@ public class PlayerMovement : MonoBehaviour
     }   
 
     private void AirJump(){
-
+        if(canJumpMidAir && Input.GetButtonDown("Jump")){
+            
+            velocity.y = jumpForce;
+            canJumpMidAir = false;
+        }
     }
 
     private void FixedUpdate(){
@@ -177,15 +191,18 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, grappleMask);
         if(hit.collider != null){
+            canDash = false;
             isGrappling = true;
             target = hit.point;
             line.enabled =true;
             line.positionCount = 2;
             StartCoroutine(Grapple());
+            
         }
     }
 
     private IEnumerator Grapple(){
+        canDash = false;
         float t =0f;
         float time = 10f;
         line.SetPosition(0, transform.position);
