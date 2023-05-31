@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Estados
     public bool grounded {get; private set;}
+    public bool enBloque {get; private set;}
     public bool jumping {get; private set;}
     public bool canJumpMidAir{get; private set;}
     private bool retracting = false;
@@ -58,11 +59,12 @@ public class PlayerMovement : MonoBehaviour
         HorizontalMovement();
         
         grounded = rigidbody.Raycast(Vector2.down);
+        enBloque = rigidbody.Raycast(Vector2.down, LayerMask.GetMask("Bloques"));
         if(!grounded){
             AirJump();
         }
 
-        if(grounded){
+        if(grounded || enBloque){
             GroundedMovement();
         }
        
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             }
             canDash = true;
         }
-        
+
         ApplyGravity();
     }
 
