@@ -12,7 +12,7 @@ public class Vida : MonoBehaviour
         vidaActual = vidaMaxima;
     }
 
-    public void recibirDanio(float cantidad){
+    public void RecibirDanio(float cantidad){
         vidaActual -= cantidad;
 
         if(vidaActual <= 0){
