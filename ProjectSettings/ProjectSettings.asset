@@ -769,11 +769,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: e97f69e6-bf38-495d-be99-6130d9baf48f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Mario
+  organizationId: jonsenapi
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

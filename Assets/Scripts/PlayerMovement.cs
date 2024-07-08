@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float inputAxis;
     private float inputDash;
     //Parametros dash
-    private bool canDash = true;
-    private bool isDashing = false;
+   
     public float dashFuerza = 24f;
     public float dashTiempo = 0.2f;
     public float dashCooldown = 1f;
@@ -18,19 +18,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 velocity;
     public float moveSpeed = 8f;
     //Parametros salto
-    public float maxJumpHeight = 5f;
+    public float maxJumpHeight = 6f;
     public float maxJumpTime = 1f;
+    public float velocidadDespuesGancho = 2f;
     public float jumpForceConstante = 1.9f;
     public float constanteInercia = 10f;
     public float jumpForce => (jumpForceConstante * maxJumpHeight / (maxJumpTime / 2));
     public float gravity => (-2f * maxJumpHeight / Mathf.Pow(maxJumpTime/2f, 2));
 
     //Parametros gancho
-    [SerializeField] LayerMask grappleMask;
+    [SerializeField] public LayerMask grappleMask;
     [SerializeField] public float maxDistance = 10f;
     public float grappleSpeed = 10f;
     public float grappleShootSpeed = 200f;
-    private bool isGrappling = false;
+    
     Vector2 target;
 
 
@@ -39,7 +40,10 @@ public class PlayerMovement : MonoBehaviour
     public bool enBloque {get; private set;}
     public bool jumping {get; private set;}
     public bool canJumpMidAir{get; private set;}
-    private bool retracting = false;
+    public bool retracting {get; private set;}
+    public bool canDash {get; private set;}
+    public bool isDashing {get; private set;}
+    public bool isGrappling {get; private set;}
     
     
     
@@ -47,6 +51,9 @@ public class PlayerMovement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
         canJumpMidAir = false;
+        canDash = true;
+        isDashing = false;
+        isGrappling = false;
         line = GetComponent<LineRenderer>();
     }
 
@@ -93,8 +100,11 @@ public class PlayerMovement : MonoBehaviour
         float multiplier = falling ? 2f : 1f;
 
         // apply gravity and terminal velocity
-        velocity.y += gravity * multiplier * Time.deltaTime;
-        velocity.y = Mathf.Max(velocity.y, gravity / 2f);
+        if(!isGrappling){
+            velocity.y += gravity * multiplier * Time.deltaTime;
+            velocity.y = Mathf.Max(velocity.y, gravity / 2f);
+        }
+        
     }
 
     private void GroundedMovement(){
@@ -192,15 +202,22 @@ public class PlayerMovement : MonoBehaviour
     private void StartGrapple(){
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, grappleMask);
+        Debug.Log(grappleMask.value);
         if(hit.collider != null){
+            
             canDash = false;
             isGrappling = true;
             target = hit.point;
             line.enabled =true;
             line.positionCount = 2;
             StartCoroutine(Grapple());
+            canJumpMidAir = true;
+            Vector2 fallingVelocity = new Vector2(velocity.x /2, velocidadDespuesGancho);
+            velocity = fallingVelocity; 
+            
             
         }
+        
     }
 
     private IEnumerator Grapple(){
@@ -209,16 +226,19 @@ public class PlayerMovement : MonoBehaviour
         float time = 10f;
         line.SetPosition(0, transform.position);
         line.SetPosition(1, transform.position);
-        Vector2 fallingVelocity = new Vector2(velocity.x /2, velocity.y/2); 
+        
         Vector2 newPos;
         for(; t< time; t += grappleShootSpeed *2 * Time.deltaTime){
-            velocity = fallingVelocity;
+            
             newPos = Vector2.Lerp(transform.position, target, t/time);
             line.SetPosition(0, transform.position);
             line.SetPosition(1, newPos);
+            
             yield return null;
         }
         line.SetPosition(1, target);
         retracting = true;
+        
+        
     }
 }

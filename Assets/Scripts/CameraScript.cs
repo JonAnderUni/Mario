@@ -9,6 +9,7 @@ public class CameraScript : MonoBehaviour
     private Transform target;
 
     private void Awake(){
+        Application.targetFrameRate = 60;
         target =  GameObject.FindWithTag("Player").transform;
     }
 
@@ -17,7 +18,10 @@ public class CameraScript : MonoBehaviour
         Vector3 targetPosition = target.position + offset;
         
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, tiempoSuave);
-
+        cameraPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, tiempoSuave);
+        
+        cameraPosition.y = 10f;
+        transform.position = cameraPosition;
+        
     } 
 }
