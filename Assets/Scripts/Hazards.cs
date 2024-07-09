@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemigo : MonoBehaviour
+public class Hazards : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
