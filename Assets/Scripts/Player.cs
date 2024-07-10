@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;

@@ -238,14 +238,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffbeb2dd2be1e34dbca281f5c92d7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  line: {fileID: 0}
   dashFuerza: 24
   dashTiempo: 0.2
   dashCooldown: 1
   moveSpeed: 8
   maxJumpHeight: 5
   maxJumpTime: 1
+  velocidadDespuesGancho: 2
   jumpForceConstante: 1.9
   constanteInercia: 10
+  grappleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  maxDistance: 10
+  grappleSpeed: 10
+  grappleShootSpeed: 200
 --- !u!212 &412816944
 SpriteRenderer:
   m_ObjectHideFlags: 0
