@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     private float inputAxis;
     private float inputDash;
     //Parametros dash
-   
     public float dashFuerza = 24f;
     public float dashTiempo = 0.2f;
     public float dashCooldown = 1f;

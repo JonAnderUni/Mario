@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private new Rigidbody2D rigidbody;
+    public Vector2 velocidad;
+    public float gravity = -9.81f;
+    public void Awake(){
+        rigidbody = GetComponent<Rigidbody2D>();
+        enabled = false;
+    }
+
+    private void FixedUpdate()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void EnPantalla(){
+        enabled = true;
+    }
+    private void FueraPantalla(){
+        enabled = false;
+    }
+    
+    private void Habilitar(){
+        rigidbody.WakeUp();
+    }
+    private void Deshabilitar(){
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.Sleep();
     }
 }
