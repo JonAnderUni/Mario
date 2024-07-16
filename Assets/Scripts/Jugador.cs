@@ -3,17 +3,21 @@ using UnityEngine;
 
 public class Jugador : MonoBehaviour
 {
+    public BoxCollider2D boxCollider { get; private set;}
+    public PlayerMovement movimiento { get; private set;}
+    public AnimacionMuerte animacionMuerte { get; private set;}
     public SpriteRendererJugador spriteRendererJugador;
-    private AnimacionMuerte animacionMuerte;
+    
+    public bool muerto => animacionMuerte.enabled;
 
     private void Awake(){
-        animacionMuerte = GetComponent<AnimacionMuerte>(); 
+        boxCollider = GetComponent<BoxCollider2D>(); 
+        movimiento = GetComponent<PlayerMovement>();
+        animacionMuerte = GetComponent<AnimacionMuerte>();
     }
     public void Hit(){
-        if(GameManager.Instance.vida == 0){
+        if(muerto){
             Muerte();
-        } else {
-            GameManager.Instance.ResetNivel(3f);
         }
     }
 

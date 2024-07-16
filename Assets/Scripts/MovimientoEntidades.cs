@@ -39,7 +39,6 @@ public class MovimientoEntidades : MonoBehaviour
         rigidbody.MovePosition(rigidbody.position + velocity*Time.fixedDeltaTime);
         bool pared = rigidbody.RaycastEnemigo(direccion, LayerMask.GetMask("Default"));
         if(pared){
-            
             direccion.x = -direccion.x;
         }
         if(rigidbody.Raycast(Vector2.down)){

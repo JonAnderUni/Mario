@@ -138,11 +138,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(velocity.x > 0f){
-        transform.eulerAngles = Vector3.zero;
-
-           
-        } else if(velocity.x < 0f){
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
+  
+        } else if(velocity.x < 0f){
+            transform.eulerAngles = Vector3.zero;
         }
     }
 
@@ -151,18 +150,18 @@ public class PlayerMovement : MonoBehaviour
         isDashing = true;
         float originalGravity = rigidbody.gravityScale;
         rigidbody.gravityScale = 0f;
-        if(transform.eulerAngles.y == 0){
+        if(transform.eulerAngles.y == 180){
             velocity = Vector2.right * dashFuerza;
-        } else if (transform.eulerAngles.y == 180){
+        } else if (transform.eulerAngles.y == 0){
             velocity = Vector2.left * dashFuerza;
         }
        
         yield return new WaitForSeconds(dashTiempo);
         rigidbody.gravityScale = originalGravity;
         isDashing = false;
-        if(transform.eulerAngles.y == 0){
+        if(transform.eulerAngles.y == 180){
             velocity.x = 8f;
-        } else if (transform.eulerAngles.y == 180){
+        } else if (transform.eulerAngles.y == 0){
             velocity.x = -8f;
         }
 

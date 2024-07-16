@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class SpriteRendererJugador : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private PlayerMovement movimiento;
+    public SpriteRenderer spriteRenderer { get; private set; }
+    public Sprite quieto;
+    public AnimacionSprites run;
+    private void Awake(){
+        movimiento = GetComponent<PlayerMovement>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+    private void LateUpdate(){
         
     }
 }

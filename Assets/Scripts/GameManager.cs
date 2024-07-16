@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
-    public int vida { get; set; }
+    public int vida { get; private set; }
     private void Awake() {
         if(Instance != null) {
             DestroyImmediate(gameObject);
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
     }
     public void GameOver() {
-        //TODO
+        NewGame();
     }
 
 }
