@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     public int escenario { get; private set;} 
     public int vida { get; set; }
     private void Awake() {
-        if(Instance == null) {
+        if(Instance != null) {
             DestroyImmediate(gameObject);
         } else {
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        mundo = 1;
+        escenario = 1;
     }
     private void OnDestroy() {
             if(Instance != null) {
@@ -28,13 +30,16 @@ public class GameManager : MonoBehaviour
         if(mundo == 1 && escenario == 1) {
             vida = 6;
         }
-        CargarEscenario(mundo, escenario +1);
+        CargarEscenario(mundo, escenario);
     }
     public void CargarEscenario(int mundo, int escenario) {
         this.mundo = mundo;
         this.escenario = escenario;
 
         SceneManager.LoadScene($"{mundo}-{escenario}");
+    }
+    public void SiguienteNivel(){
+        CargarEscenario(mundo, escenario+1);
     }
     public void ResetNivel(float delay){
         Invoke(nameof(ResetNivel), delay);

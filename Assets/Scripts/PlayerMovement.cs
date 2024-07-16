@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private new Camera camera;
     private new Rigidbody2D rigidbody;
@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
         isDashing = false;
         isGrappling = false;
         line = GetComponent<LineRenderer>();
+        grappleMask = LayerMask.GetMask("Default");
     }
 
     private void Update(){
@@ -63,8 +64,8 @@ public class Player : MonoBehaviour
         }
         
         HorizontalMovement();
-        
         grounded = rigidbody.Raycast(Vector2.down);
+        
         enBloque = rigidbody.Raycast(Vector2.down, LayerMask.GetMask("Bloques"));
         if(!grounded){
             AirJump();
@@ -94,11 +95,9 @@ public class Player : MonoBehaviour
 
     private void ApplyGravity(){
         
-        // check if falling
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
         float multiplier = falling ? 2f : 1f;
 
-        // apply gravity and terminal velocity
         if(!isGrappling){
             velocity.y += gravity * multiplier * Time.deltaTime;
             velocity.y = Mathf.Max(velocity.y, gravity / 2f);
@@ -139,7 +138,9 @@ public class Player : MonoBehaviour
         }
 
         if(velocity.x > 0f){
-            transform.eulerAngles = Vector3.zero;
+        transform.eulerAngles = Vector3.zero;
+
+           
         } else if(velocity.x < 0f){
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
         }
