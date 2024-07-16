@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
-    public int vida { get; private set; }
+    public int vida { get; set; }
     private void Awake() {
         if(Instance == null) {
             DestroyImmediate(gameObject);
@@ -36,10 +36,17 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene($"{mundo}-{escenario}");
     }
-    public void ResetNivel(){
-        //TODO
+    public void ResetNivel(float delay){
+        Invoke(nameof(ResetNivel), delay);
     }
-    
+    private void ResetNivel(){
+        vida--;
+        if(vida > 0) {
+            CargarEscenario(mundo, escenario);
+        } else {
+            GameOver();
+        }
+    }
     public void GameOver() {
         //TODO
     }
