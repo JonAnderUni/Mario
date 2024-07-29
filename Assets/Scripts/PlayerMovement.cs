@@ -44,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isDashing {get; private set;}
     public bool isGrappling {get; private set;}
     
+    //Animator
+    [SerializeField] public Animator animator;
     
     
     private void Awake(){
