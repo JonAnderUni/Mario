@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Hazards : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void Awake(){
+        enabled = true;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void OnCollisionEnter2D(Collision2D collision){
+        Debug.Log("Entre");
+        if(collision.gameObject.CompareTag("Player")){
+            Jugador jugador = collision.gameObject.GetComponent<Jugador>();
+            jugador.Hit();
+        }
     }
 }

@@ -14,7 +14,9 @@ public class Enemigo : MonoBehaviour
             if(collision.transform.DotTest(transform, Vector2.down)){
                 Muerte();
             } else {
+                jugador.muerto = true;
                 jugador.Hit();
+                
             }
         }
         
@@ -24,17 +26,7 @@ public class Enemigo : MonoBehaviour
         enabled = false;
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
-    private void EnPantalla(){
-        enabled = true;
-    }
-    private void FueraPantalla(){
-        enabled = false;
-    }
+    
     
     private void OnEnable(){
         rigidbody.WakeUp();

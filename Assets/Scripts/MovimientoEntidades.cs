@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovimientoEntidades : MonoBehaviour
 {
     public float speed = 1f;
-    public Vector2 direccion = Vector2.right;
+    public Vector2 direccion = Vector2.left;
 
     private new Rigidbody2D rigidbody;
     private Vector2 velocity;
@@ -38,8 +38,9 @@ public class MovimientoEntidades : MonoBehaviour
 
         rigidbody.MovePosition(rigidbody.position + velocity*Time.fixedDeltaTime);
         bool pared = rigidbody.RaycastEnemigo(direccion, LayerMask.GetMask("Default"));
+        Debug.Log(direccion);
         if(pared){
-            direccion.x = -direccion.x;
+            direccion = -direccion;
         }
         if(rigidbody.Raycast(Vector2.down)){
             velocity.y = Mathf.Max(velocity.y, 0f);

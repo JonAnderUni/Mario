@@ -3,25 +3,25 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set;}
+    public static GameManager Instancia { get; private set;}
 
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
     public int vida { get; private set; }
     private void Awake() {
-        if(Instance != null) {
+        if(Instancia != null) {
             DestroyImmediate(gameObject);
         } else {
-            Instance = this;
+            Instancia = this;
             DontDestroyOnLoad(gameObject);
         }
         mundo = 1;
         escenario = 1;
     }
     private void OnDestroy() {
-            if(Instance != null) {
-                Instance = null;
-            }
+        if(Instancia == this) {
+            Instancia = null;
+        }
     }
     private void Start() {
         NewGame();

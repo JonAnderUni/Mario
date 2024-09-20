@@ -6,14 +6,14 @@ public class CameraScript : MonoBehaviour
     public float tiempoSuave = 0.25f;
     private Vector3 velocity = Vector3.zero;
 
-    private Transform target;
+    [SerializeField] private Transform target;
 
     private void Awake(){
         Application.targetFrameRate = 60;
         target =  GameObject.FindWithTag("Player").transform;
     }
 
-    private void Update(){
+    private void FixedUpdate(){
         Vector3 cameraPosition = transform.position;
         Vector3 targetPosition = target.position + offset;
         

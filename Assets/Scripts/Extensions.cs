@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,11 +23,19 @@ public static class Extensions
         }
 
         float radius =  0.25f;
-        float distance = 0.44f;
+        float distance = 0.375f;
         
         
         RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction.normalized, distance, listaMascara);
         return hit.collider != null && hit.rigidbody != rigidbody;
+    }
+    public static bool BoxCast(this BoxCollider2D collider ,Vector2 direction, LayerMask layer){
+        RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, direction, .1f, layer);
+        return hit;
+    }
+    public static bool BoxCast(this BoxCollider2D collider ,Vector2 direction){
+        RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, direction, .1f, layerMask);
+        return hit;
     }
 
     public static bool Raycast(this Rigidbody2D rigidbody, Vector2 direction, LayerMask listaMascara){
