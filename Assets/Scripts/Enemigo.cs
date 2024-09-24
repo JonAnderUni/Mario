@@ -5,7 +5,7 @@ public class Enemigo : MonoBehaviour
     private new Rigidbody2D rigidbody;
     public Vector2 velocidad;
     public float gravity = -9.81f;
-
+    
     public Sprite golpeadoSprite;
 
     private void OnCollisionEnter2D(Collision2D collision){

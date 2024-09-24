@@ -6,12 +6,14 @@ public class MovimientoEntidades : MonoBehaviour
 {
     public float speed = 1f;
     public Vector2 direccion = Vector2.left;
-
+    public GameObject nodo1;
+    public GameObject nodo2;
     private new Rigidbody2D rigidbody;
     private Vector2 velocity;
-
+    private Transform currentNodo;
     private void Awake(){
         rigidbody = GetComponent<Rigidbody2D>();
+        currentNodo = nodo1.transform;
         enabled=false;
     }
 
@@ -33,13 +35,16 @@ public class MovimientoEntidades : MonoBehaviour
         rigidbody.Sleep();
     }
     private void FixedUpdate(){
+        Vector2 direccionNodo = currentNodo.position - transform.position;
         velocity.x = direccion.x * speed;
         velocity.y += Physics2D.gravity.y * Time.fixedDeltaTime;
 
         rigidbody.MovePosition(rigidbody.position + velocity*Time.fixedDeltaTime);
-        bool pared = rigidbody.RaycastEnemigo(direccion, LayerMask.GetMask("Default"));
-        Debug.Log(direccion);
-        if(pared){
+        if(Vector2.Distance(transform.position, currentNodo.position) < 0.5f && currentNodo == nodo1.transform){
+            currentNodo = nodo2.transform;
+            direccion = -direccion;
+        } else if(Vector2.Distance(transform.position, currentNodo.position) < 0.5f && currentNodo == nodo2.transform){
+            currentNodo = nodo1.transform;
             direccion = -direccion;
         }
         if(rigidbody.Raycast(Vector2.down)){
