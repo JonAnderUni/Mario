@@ -5,9 +5,7 @@ public class Jugador : MonoBehaviour
 {
     public BoxCollider2D boxCollider { get; private set;}
     public PlayerMovement movimiento { get; private set;}
-    
     public bool muerto;
-
     private void Awake(){
         boxCollider = GetComponent<BoxCollider2D>(); 
         movimiento = GetComponent<PlayerMovement>();
@@ -17,6 +15,8 @@ public class Jugador : MonoBehaviour
             Muerte();
         }
     }
+
+    
 
     private void Muerte(){
         Debug.Log(GameManager.Instancia);

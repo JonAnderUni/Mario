@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
     public int vida { get; private set; }
+    public int llaves {get; private set; }
     private void Awake() {
         if(Instancia != null) {
             DestroyImmediate(gameObject);
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
         }
     }
     private void Start() {
-        NewGame();
+        SceneManager.LoadScene(0);
     }
     public void NewGame() {
         if(mundo == 1 && escenario == 1) {
@@ -54,6 +55,9 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver() {
         NewGame();
+    }
+    public void RecogerLlave(){
+        llaves++;
     }
 
 }

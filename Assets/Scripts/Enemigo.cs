@@ -25,9 +25,6 @@ public class Enemigo : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         enabled = false;
     }
-
-    
-    
     private void OnEnable(){
         rigidbody.WakeUp();
     }
