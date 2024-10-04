@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update(){
         
+        
         var estado = GetEstado();
         if(isDashing){
             return;

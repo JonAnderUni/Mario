@@ -57,4 +57,16 @@ public class MovimientoEntidades : MonoBehaviour
             transform.localEulerAngles = Vector3.zero;
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.CompareTag("Enemigos")){
+            if(direccion.x > 0f){
+                direccion = -direccion;
+                transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+            } else if(direccion.x < 0f){
+                direccion = -direccion;
+                transform.localEulerAngles = Vector3.zero;
+            }
+        }
+        
+    }
 }

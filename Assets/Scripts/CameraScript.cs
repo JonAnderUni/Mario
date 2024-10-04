@@ -16,8 +16,6 @@ public class CameraScript : MonoBehaviour
     private void FixedUpdate(){
         Vector3 cameraPosition = transform.position;
         Vector3 targetPosition = target.position + offset;
-        
-
         cameraPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, tiempoSuave);
         
         cameraPosition.y = 10f;

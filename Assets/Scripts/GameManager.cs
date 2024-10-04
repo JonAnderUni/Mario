@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instancia { get; private set;}
-
+    public int vida;
+    public int vidaMax;
+    public Image[] corazones;
+    public Sprite corazonVacio;
+    public Sprite corazonLleno;
+    public GameObject corazonesUI;
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
-    public int vida { get; private set; }
     public int llaves {get; private set; }
+    
     private void Awake() {
         if(Instancia != null) {
             DestroyImmediate(gameObject);
@@ -19,6 +25,27 @@ public class GameManager : MonoBehaviour
         mundo = 1;
         escenario = 1;
     }
+    private void Update() {
+        if (SceneManager.GetActiveScene().buildIndex != 0){
+            corazonesUI.SetActive(true);
+        } else {
+            corazonesUI.SetActive(false);
+        }
+        for(int i = 0; i < corazones.Length; i++){
+            if(i< vida){
+                corazones[i].sprite = corazonLleno;
+            }else{
+                corazones[i].sprite = corazonVacio;
+            }
+            if(i< vidaMax){
+                corazones[i].enabled = true;
+            }else{
+                corazones[i].enabled = false;
+            }
+        }
+
+    }
+    
     private void OnDestroy() {
         if(Instancia == this) {
             Instancia = null;
@@ -29,7 +56,8 @@ public class GameManager : MonoBehaviour
     }
     public void NewGame() {
         if(mundo == 1 && escenario == 1) {
-            vida = 6;
+            vida = 3;
+            vidaMax = 3;
         }
         CargarEscenario(mundo, escenario);
     }
