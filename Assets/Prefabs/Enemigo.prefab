@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4877446393511693664}
   - component: {fileID: 4227776580607746673}
   - component: {fileID: 6998699675032578920}
+  - component: {fileID: 3935583141454182038}
   m_Layer: 0
   m_Name: Enemigo
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   direccion: {x: -1, y: 0}
+  nodo1: {fileID: 0}
+  nodo2: {fileID: 0}
 --- !u!50 &4877446393511693664
 Rigidbody2D:
   serializedVersion: 4
@@ -165,3 +168,18 @@ MonoBehaviour:
   - {fileID: 1994648382, guid: 7cb11d8ad83288e409647862bf5fbd5a, type: 3}
   - {fileID: -594702277, guid: 7cb11d8ad83288e409647862bf5fbd5a, type: 3}
   framerate: 0.16666667
+--- !u!114 &3935583141454182038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530798955626525471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505f129f6d56b1541aa783248167ff4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: {x: 0, y: 0}
+  gravity: -9.81
+  golpeadoSprite: {fileID: -1222387646, guid: 7cb11d8ad83288e409647862bf5fbd5a, type: 3}

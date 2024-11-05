@@ -20,6 +20,7 @@ public class Jugador : MonoBehaviour
 
     private void Muerte(){
         Debug.Log(GameManager.Instancia);
+        movimiento.enabled = false;
         GameManager.Instancia.ResetNivel(3f);
     }
 }

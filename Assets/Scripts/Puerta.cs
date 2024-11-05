@@ -11,8 +11,7 @@ public class Puerta : MonoBehaviour
     
     private IEnumerator CargarSiguienteNivel(Transform jugador){
         yield return new WaitForSeconds(3f);
-
         jugador.gameObject.SetActive(false);
-        
+        GameManager.Instancia.SiguienteNivel();
     }
 }
