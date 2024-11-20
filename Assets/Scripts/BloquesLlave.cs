@@ -7,6 +7,7 @@ public class BloquesLlave : MonoBehaviour
         Debug.Log("Entro");
         if (collision.gameObject.CompareTag("Player") && GameManager.Instancia.llaves == llavesRequeridas){
             Destroy(gameObject);
+            GameManager.Instancia.llaves = 0;
         }
     }
 }

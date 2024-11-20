@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 36408455168
-    m_Key: Menu
+    m_Key: MENU
     m_Metadata:
       m_Items: []
   - m_Id: 116892954624
@@ -37,6 +37,46 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8306095353856
     m_Key: Aceptar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4719036887527424
+    m_Key: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4719397098549248
+    m_Key: Mover
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4720420403867648
+    m_Key: Saltar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4765046917623808
+    m_Key: DASH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4767150012952576
+    m_Key: GANCHO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5248266289344512
+    m_Key: Final
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249376274149376
+    m_Key: Replay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249655551881216
+    m_Key: MenuPrincipal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249867662028800
+    m_Key: SalirJUego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5259791871832064
+    m_Key: Muerto
     m_Metadata:
       m_Items: []
   m_Metadata:

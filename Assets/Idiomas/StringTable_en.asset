@@ -42,6 +42,46 @@ MonoBehaviour:
     m_Localized: ACCEPT
     m_Metadata:
       m_Items: []
+  - m_Id: 4719036887527424
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4719397098549248
+    m_Localized: MOVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4720420403867648
+    m_Localized: JUMP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4765046917623808
+    m_Localized: DASH
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4767150012952576
+    m_Localized: THROW HOOK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5248266289344512
+    m_Localized: You have finished the game!! Thanks for playing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249376274149376
+    m_Localized: PLAY AGAIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249655551881216
+    m_Localized: MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249867662028800
+    m_Localized: EXIT GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5259791871832064
+    m_Localized: YOU DIED :(
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

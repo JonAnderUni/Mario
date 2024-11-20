@@ -42,6 +42,46 @@ MonoBehaviour:
     m_Localized: ACEPTAR
     m_Metadata:
       m_Items: []
+  - m_Id: 4719036887527424
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4719397098549248
+    m_Localized: MOVERSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4720420403867648
+    m_Localized: SALTAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4765046917623808
+    m_Localized: ACELERON
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4767150012952576
+    m_Localized: LANZAR GANCHO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5248266289344512
+    m_Localized: "\xA1\xA1Has terminado el juego!! Gracias por jugar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249376274149376
+    m_Localized: VOLVER A JUGAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249655551881216
+    m_Localized: MENU PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249867662028800
+    m_Localized: SALIR DEL JUEGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5259791871832064
+    m_Localized: HAS MUERTO :(
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

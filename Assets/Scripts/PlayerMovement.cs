@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public float grappleSpeed = 10f;
     public float grappleShootSpeed = 200f;
     Vector2 target;
-
+    private bool techoHit;
 
     //Estados
     public bool grounded {get; private set;}
@@ -78,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
         grounded = collider.BoxCast(Vector2.down);
         
         enBloque = collider.BoxCast(Vector2.down, LayerMask.GetMask("Bloques"));
+
+        techoHit = collider.BoxCast(Vector2.up,  LayerMask.GetMask("techo"));
         if(!grounded){
             AirJump();
         }
@@ -118,8 +120,12 @@ public class PlayerMovement : MonoBehaviour
 
         rigidbody.MovePosition(position);
     }
+    
     private void ApplyGravity(){
-        
+        if(techoHit == true){
+            velocity.y = 0f;
+        }
+
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
         
         float multiplier = falling ? 2f : 1f;
@@ -133,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void GroundedMovement(){
         
+
         velocity.y = Mathf.Max(velocity.y, 0f);
         if(grounded){
             canJumpMidAir = true;

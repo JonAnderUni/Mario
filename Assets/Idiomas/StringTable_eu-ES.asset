@@ -42,6 +42,46 @@ MonoBehaviour:
     m_Localized: BAIETSI
     m_Metadata:
       m_Items: []
+  - m_Id: 4719036887527424
+    m_Localized: AGINTEAK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4719397098549248
+    m_Localized: MUGITU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4720420403867648
+    m_Localized: SALTATU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4765046917623808
+    m_Localized: BIZKORTZE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4767150012952576
+    m_Localized: KAKOA JAURTITZEA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5248266289344512
+    m_Localized: Amaitu duzu jokoa!! Eskerrik asko jokatzeagatik
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249376274149376
+    m_Localized: BERRIZ JOKATU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249655551881216
+    m_Localized: MENU NAGUSI
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5249867662028800
+    m_Localized: JOKOTIK IRTETEA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5259791871832064
+    m_Localized: HIL EGIN ZARA
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

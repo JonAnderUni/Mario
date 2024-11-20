@@ -5,6 +5,7 @@ public class MenuPausa : MonoBehaviour
 {
     public static bool EstaPausado = false;
     public GameObject pausaMenuUI;
+    public GameObject menuMuertoUI;
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
@@ -14,6 +15,9 @@ public class MenuPausa : MonoBehaviour
             else {
                 Pausar();
             }
+        }
+        if(GameManager.Instancia.vida == 0){
+            menuMuertoUI.SetActive(true);
         }
     }
     public void Continuar(){
@@ -34,5 +38,10 @@ public class MenuPausa : MonoBehaviour
     public void SalirJuego(){
         Debug.Log("Saliendo del juego...");
         Application.Quit();
+    }
+    public void ReiniciarJuego(){
+        menuMuertoUI.SetActive(false);
+        GameManager.Instancia.CargarNivel1();
+
     }
 }

@@ -11,9 +11,10 @@ public class GameManager : MonoBehaviour
     public Sprite corazonVacio;
     public Sprite corazonLleno;
     public GameObject corazonesUI;
+    public GameObject muertoUI;
     public int mundo { get; private set; }
     public int escenario { get; private set;} 
-    public int llaves {get; private set; }
+    public int llaves;
     
     private void Awake() {
         if(Instancia != null) {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
         }
         mundo = 1;
         escenario = 1;
+        
     }
     private void Update() {
         if (SceneManager.GetActiveScene().buildIndex != 0){
@@ -55,19 +57,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     public void NewGame() {
-        if(mundo == 1 && escenario == 1) {
-            vida = 3;
-            vidaMax = 3;
-        }
+        vida = 3;
+        vidaMax=3;
         CargarEscenario(mundo, escenario);
     }
     public void CargarEscenario(int mundo, int escenario) {
         this.mundo = mundo;
         this.escenario = escenario;
+        muertoUI.SetActive(false);
 
         SceneManager.LoadScene($"{mundo}-{escenario}");
     }
     public void SiguienteNivel(){
+        llaves = 0;
+        if(escenario == 3){
+            return;
+        }
         CargarEscenario(mundo, escenario+1);
     }
     public void ResetNivel(float delay){
@@ -75,17 +80,33 @@ public class GameManager : MonoBehaviour
     }
     private void ResetNivel(){
         vida--;
-        if(vida > 0) {
+        llaves = 0;
+        if(vida >= 1) {
             CargarEscenario(mundo, escenario);
         } else {
-            GameOver();
+            muertoUI.SetActive(true);
         }
     }
-    public void GameOver() {
-        NewGame();
-    }
+    
     public void RecogerLlave(){
         llaves++;
+    }
+    public void CargarNivel1(){
+        llaves = 0;
+        escenario = 1;
+        vida = 3;
+        CargarEscenario(mundo, escenario);
+    }
+    public void ReiniciarJuego(){
+        
+        CargarNivel1();
+    }
+    public void SalirJuego(){
+        Debug.Log("Saliendo del juego...");
+        Application.Quit();
+    }
+    public void CargarMenu(){
+        SceneManager.LoadScene(0);
     }
 
 }
