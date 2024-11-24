@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         enBloque = collider.BoxCast(Vector2.down, LayerMask.GetMask("Bloques"));
 
         techoHit = collider.BoxCast(Vector2.up,  LayerMask.GetMask("techo"));
+        techoHit = collider.BoxCast(Vector2.up,  LayerMask.GetMask("Default"));
         if(!grounded){
             AirJump();
         }

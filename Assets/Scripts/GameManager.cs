@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     public void NewGame() {
+        escenario = 1;
         vida = 3;
         vidaMax=3;
         CargarEscenario(mundo, escenario);
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
         llaves = 0;
         escenario = 1;
         vida = 3;
+        vidaMax = 3;
         CargarEscenario(mundo, escenario);
     }
     public void ReiniciarJuego(){
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
     public void CargarMenu(){
+        
         SceneManager.LoadScene(0);
     }
 
